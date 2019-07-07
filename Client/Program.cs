@@ -14,10 +14,10 @@ namespace CasCap
             Console.ReadKey();
         }
 
-        async Task Run()
+        async static Task Run()
         {
             AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
-            var httpClient = new HttpClient();
+            using var httpClient = new HttpClient();
             // The port number(50051) must match the port of the gRPC server.
             httpClient.BaseAddress = new Uri("http://localhost:50051");
             var client = GrpcClient.Create<Greeter.GreeterClient>(httpClient);

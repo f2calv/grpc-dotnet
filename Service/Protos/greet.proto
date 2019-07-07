@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+//import "google/protobuf/empty.proto";
+
 option csharp_namespace = "CasCap.Service";
 
 package Greet;
@@ -10,7 +12,8 @@ service Greeter {
   rpc SayHello (HelloRequest) returns (HelloReply) {}
 
   //gets the time
-  //rpc GetTime (TimeRequest) returns (TimeReply) {}
+  //rpc GetTime (google.protobuf.Empty) returns (TimeReply) {}
+  rpc GetTime (TimeRequest) returns (TimeReply) {}
 }
 
 // The request message containing the user's name.
@@ -23,9 +26,10 @@ message HelloReply {
   string message = 1;
 }
 
-//message TimeRequest {
-//}
+message TimeRequest {
+  int64 UtcNowTicks = 1;
+}
 
-//message TimeReply {
-//  DateTime utcNow = 1;
-//}
+message TimeReply {
+  int64 UtcNowTicks = 1;
+}

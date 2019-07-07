@@ -25,13 +25,13 @@ namespace CasCap.Service
             });
         }
 
-        //public override Task<TimeReply> GetTime(TimeRequest request, ServerCallContext context)
-        //{
-        //    _logger.LogInformation(nameof(GetTime));
-        //    return Task.FromResult(new TimeReply
-        //    {
-        //        utcNow = DateTime.UtcNow,
-        //    });
-        //}
+        public override Task<TimeReply> GetTime(TimeRequest request, ServerCallContext context)
+        {
+            _logger.LogInformation(nameof(GetTime));
+            return Task.FromResult(new TimeReply
+            {
+                UtcNowTicks = DateTime.UtcNow.Ticks,
+            });
+        }
     }
 }
