@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="..\Service\Protos\greet.proto" GrpcServices="Client">
+    <Protobuf Include="..\Protos\greet.proto" GrpcServices="Client">
       <Link>Protos\greet.proto</Link>
     </Protobuf>
   </ItemGroup>
