@@ -1,0 +1,13 @@
+<Project>
+
+  <PropertyGroup>
+    <RootNamespace>CasCap</RootNamespace>
+    <!--<LangVersion>latest</LangVersion>-->
+    <!--remove below LangVersion when 8.0 is official-->
+    <!--<LangVersion>8.0</LangVersion>-->
+    <LangVersion>preview</LangVersion>
+    <!--<NullableContextOptions>enable</NullableContextOptions>-->
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  
+</Project>
