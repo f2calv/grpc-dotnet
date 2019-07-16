@@ -13,24 +13,24 @@ namespace CasCap.Service
             _logger = logger;
         }
 
-        public override Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
+        public override Task<HelloResponse> SayHello(HelloRequest request, ServerCallContext context)
         {
             var c1 = context;
             var ctx = context.GetHttpContext();
 
             _logger.LogInformation(nameof(SayHello));
-            return Task.FromResult(new HelloReply
+            return Task.FromResult(new HelloResponse
             {
                 Message = "Hello " + request.Name
             });
         }
 
-        public override Task<TimeReply> GetTime(TimeRequest request, ServerCallContext context)
+        public override Task LotsOfReplies(HelloRequest request, IServerStreamWriter<HelloResponse> responseStream, ServerCallContext context)
         {
-            _logger.LogInformation(nameof(GetTime));
-            return Task.FromResult(new TimeReply
+            _logger.LogInformation(nameof(LotsOfReplies));
+            return Task.FromResult(new HelloResponse
             {
-                UtcNowTicks = DateTime.UtcNow.Ticks,
+                Message = "ok"
             });
         }
     }
