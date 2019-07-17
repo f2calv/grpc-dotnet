@@ -9,6 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Protos", "Protos", "{84792E61-5737-400D-9024-38154C6BDC9C}"
 	ProjectSection(SolutionItems) = preProject
+		Protos\another.proto = Protos\another.proto
 		Protos\greet.proto = Protos\greet.proto
 	EndProjectSection
 EndProject
