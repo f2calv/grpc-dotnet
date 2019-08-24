@@ -95,4 +95,5 @@ message NestedObject {
   }
   Colour colour = 2;
   AnotherObject obj = 3;
+  repeated AnotherObject objects = 4;
 }
