@@ -25,6 +25,19 @@ namespace CasCap.Service
             });
         }
 
+        public override Task<FullResponse> GetFullResponse(Google.Protobuf.WellKnownTypes.Empty request, ServerCallContext context)
+        {
+            var c1 = context;
+            var ctx = context.GetHttpContext();
+
+            _logger.LogInformation(nameof(SayHello));
+            return Task.FromResult(new FullResponse
+            {
+                //Start = new Google.Protobuf.WellKnownTypes.Timestamp() { },
+                //strz = "wibble",
+            });
+        }
+
         public override Task LotsOfReplies(HelloRequest request, IServerStreamWriter<HelloResponse> responseStream, ServerCallContext context)
         {
             _logger.LogInformation(nameof(LotsOfReplies));
@@ -33,5 +46,8 @@ namespace CasCap.Service
                 Message = "ok"
             });
         }
+
+
+        //todo: add remaining methods here
     }
 }
