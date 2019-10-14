@@ -1,1 +1,1 @@
-gRPC w/ .NET Core 3.0 (preview-6) playground... :)
+gRPC w/ .NET Core 3.0 playground... :)

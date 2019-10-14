@@ -1,6 +1,5 @@
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Threading.Tasks;
 namespace CasCap.Service
 {
@@ -15,7 +14,6 @@ namespace CasCap.Service
 
         public override Task<HelloResponse> SayHello(HelloRequest request, ServerCallContext context)
         {
-            var c1 = context;
             var ctx = context.GetHttpContext();
 
             _logger.LogInformation(nameof(SayHello));
@@ -46,7 +44,6 @@ namespace CasCap.Service
                 Message = "ok"
             });
         }
-
 
         //todo: add remaining methods here
     }
