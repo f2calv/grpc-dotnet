@@ -1,0 +1,65 @@
+//https://grpc.io/docs/guides/concepts/
+//https://developers.google.com/protocol-buffers/docs/csharptutorial
+
+syntax = "proto3";
+
+import "another.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "CasCap.Services";
+
+package Market;
+
+service Markets {
+  
+  // Unary RPCs where the client sends a single request to the server and gets a single response back, just like a normal function call.
+  rpc GetMarket (MarketRequest) returns (MarketResponse);
+
+  rpc GetMarkets (google.protobuf.Empty) returns (MarketsResponse);
+
+  rpc GetTick (google.protobuf.Empty) returns (TickResponse);
+
+  rpc GetTicks (google.protobuf.Empty) returns (TicksResponse);
+
+    //Server streaming RPCs where the client sends a request to the server and gets a stream to read a sequence of messages back.
+  //The client reads from the returned stream until there are no more messages. gRPC guarantees message ordering within an individual RPC call.
+  rpc GetTickStream(google.protobuf.Empty) returns (stream TickResponse);
+
+  //Client streaming RPCs where the client writes a sequence of messages and sends them to the server, again using a provided stream.
+  //Once the client has finished writing the messages, it waits for the server to read them and return its response.
+  //Again gRPC guarantees message ordering within an individual RPC call.
+  //rpc LotsOfTicks(stream HelloRequest) returns (TickResponse);
+
+  //Bidirectional streaming RPCs where both sides send a sequence of messages using a read-write stream.
+  //The two streams operate independently, so clients and servers can read and write in whatever order they like:
+  //for example, the server could wait to receive all the client messages before writing its responses, or it could alternately read a message then write a message,
+  //or some other combination of reads and writes. The order of messages in each stream is preserved.
+  //rpc BidDiTicks(stream HelloRequest) returns (stream TickResponse);
+}
+
+message MarketRequest {
+  string ticker = 1;
+}
+
+message MarketResponse {
+  string ticker = 1;
+  string name = 2;
+  double bid = 3;
+  double offer = 4;
+}
+
+message MarketsResponse {
+  repeated MarketResponse markets = 1;
+}
+
+message TickResponse {
+  string ticker = 1;
+  double bid = 2;
+  double offer = 3;
+  google.protobuf.Timestamp utcNow = 4;
+}
+
+message TicksResponse {
+  repeated TickResponse ticks = 1;
+}

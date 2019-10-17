@@ -7,7 +7,7 @@ import "another.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
-option csharp_namespace = "CasCap.Service";
+option csharp_namespace = "CasCap.Services";
 
 package Greet;
 

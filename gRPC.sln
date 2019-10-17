@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Protos", "Protos", "{84792E
 	ProjectSection(SolutionItems) = preProject
 		Protos\another.proto = Protos\another.proto
 		Protos\greet.proto = Protos\greet.proto
+		Protos\market.proto = Protos\market.proto
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientLib", "ClientLib\ClientLib.csproj", "{4E0B2997-D4B4-4F6C-A418-99E8A1E7ED0A}"
@@ -16,6 +17,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientB", "ClientB\ClientB.csproj", "{4AC41620-E71F-4F75-B576-8BEC5690DBE8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientA", "ClientA\ClientA.csproj", "{74DD72E9-21D7-412C-BCAD-1144700C019F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientC", "ClientC\ClientC.csproj", "{36E065A9-31B4-42FE-870C-E4DA235306C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +42,10 @@ Global
 		{74DD72E9-21D7-412C-BCAD-1144700C019F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74DD72E9-21D7-412C-BCAD-1144700C019F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74DD72E9-21D7-412C-BCAD-1144700C019F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36E065A9-31B4-42FE-870C-E4DA235306C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36E065A9-31B4-42FE-870C-E4DA235306C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36E065A9-31B4-42FE-870C-E4DA235306C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36E065A9-31B4-42FE-870C-E4DA235306C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

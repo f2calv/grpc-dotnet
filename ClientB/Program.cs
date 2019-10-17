@@ -1,4 +1,4 @@
-﻿using CasCap.Service;
+﻿using CasCap.Services;
 using Grpc.Net.Client;
 using System;
 using System.Threading.Tasks;

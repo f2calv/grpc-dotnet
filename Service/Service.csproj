@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.9.1" />
+    <PackageReference Include="Google.Protobuf" Version="3.10.0" />
     <PackageReference Include="Grpc.AspNetCore.Server" Version="2.23.2" />
-    <PackageReference Include="Grpc.Tools" Version="2.23.0">
+    <PackageReference Include="Grpc.Tools" Version="2.24.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -19,6 +19,9 @@
     </Protobuf>
     <Protobuf Include="..\Protos\greet.proto" GrpcServices="Server">
       <Link>Protos\greet.proto</Link>
+    </Protobuf>
+    <Protobuf Include="..\Protos\market.proto" GrpcServices="Server">
+      <Link>Protos\market.proto</Link>
     </Protobuf>
   </ItemGroup>
   

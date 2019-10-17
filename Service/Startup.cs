@@ -1,4 +1,4 @@
-﻿using CasCap.Service;
+﻿using CasCap.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -25,6 +25,7 @@ namespace CasCap
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGrpcService<GreeterService>();
+                endpoints.MapGrpcService<MarketsService>();
 
                 endpoints.MapGet("/", async context =>
                 {
