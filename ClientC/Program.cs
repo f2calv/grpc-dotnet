@@ -26,9 +26,9 @@ namespace CasCap
 
             try
             {
-                await foreach (var tickData in streamingCall.ResponseStream.ReadAllAsync(cancellationToken: cts.Token))
+                await foreach (var tick in streamingCall.ResponseStream.ReadAllAsync(cancellationToken: cts.Token))
                 {
-                    Console.WriteLine($"{tickData.UtcNow.ToDateTime():s}\t| {tickData.Ticker}\t| {tickData.Bid:0.00}/{tickData.Offer:0.00}");
+                    Console.WriteLine($"{tick.Date.ToDateTime():HH:mm:ss.fff}\t| {tick.Symbol}\t| {tick.Bid:0.00}/{tick.Offer:0.00}");
                 }
             }
             catch (RpcException ex) when (ex.StatusCode == StatusCode.Cancelled)

@@ -20,7 +20,7 @@ service Markets {
 
   rpc GetTick (google.protobuf.Empty) returns (TickResponse);
 
-  rpc GetTicks (google.protobuf.Empty) returns (TicksResponse);
+  //rpc GetTicks (google.protobuf.Empty) returns (TicksResponse);
 
     //Server streaming RPCs where the client sends a request to the server and gets a stream to read a sequence of messages back.
   //The client reads from the returned stream until there are no more messages. gRPC guarantees message ordering within an individual RPC call.
@@ -39,11 +39,11 @@ service Markets {
 }
 
 message MarketRequest {
-  string ticker = 1;
+  string symbol = 1;
 }
 
 message MarketResponse {
-  string ticker = 1;
+  string symbol = 1;
   string name = 2;
   double bid = 3;
   double offer = 4;
@@ -54,12 +54,12 @@ message MarketsResponse {
 }
 
 message TickResponse {
-  string ticker = 1;
+  string symbol = 1;
   double bid = 2;
   double offer = 3;
-  google.protobuf.Timestamp utcNow = 4;
+  google.protobuf.Timestamp date = 4;
 }
 
-message TicksResponse {
-  repeated TickResponse ticks = 1;
-}
+//message TicksResponse {
+//  repeated TickResponse ticks = 1;
+//}

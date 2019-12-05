@@ -2,8 +2,9 @@
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
 namespace CasCap.Services
 {
@@ -18,64 +19,95 @@ namespace CasCap.Services
             await Task.Delay(0);
             _logger.LogInformation(nameof(GetTickStream));
 
-            var r = new Random();
-            var utcNow = DateTime.UtcNow;
-
-            var i = 0;
-            while (!context.CancellationToken.IsCancellationRequested && i < 20)
+            while (!context.CancellationToken.IsCancellationRequested)
             {
-                //generate random time delay
-                await Task.Delay(r.Next(0, 5) * 100);
-
-                //pick out a random stock
-                var stockIndex = r.Next(0, stocks.Count);
-                var stock = stocks[stockIndex];
-
-                //generate random stock price change
-                //https://stackoverflow.com/questions/3975290/produce-a-random-number-in-a-range-using-c-sharp
-                var rDiff = Math.Round((r.NextDouble() * 2) - 1.0, 1);
-
-                //update stock prices
-                stock.bid += rDiff;
-                stock.offer += rDiff;
-                stock.date = DateTime.UtcNow;
-
-                var tick = new TickResponse
+                var cts = new CancellationTokenSource(500);
+                await foreach (var tick in GetTicksAsync(cancellationToken: cts.Token))
                 {
-                    Bid = stock.bid,
-                    Offer = stock.offer,
-                    Ticker = stock.ticker,
-                    UtcNow = stock.date.ToTimestamp(),
-                };
-
-                _logger.LogInformation("Sending TickResponse response");
-
-                await responseStream.WriteAsync(tick);
+                    _logger.LogInformation("Sending TickResponse response");
+                    await responseStream.WriteAsync(tick);
+                }
             }
         }
 
-        public List<Stock> stocks
+        List<TickResponse> GetTicks
+        {
+            get
+            {
+                var r = new Random();
+                var limit = 1_000;
+                var l = new List<TickResponse>(limit);
+                for (var i = 0; i < limit; i++)
+                    l.Add(GetTick(r));
+                return l;
+            }
+        }
+
+        async IAsyncEnumerable<TickResponse> GetTicksAsync([EnumeratorCancellation]CancellationToken cancellationToken)
+        {
+            var r = new Random();
+            var utcNow = DateTime.UtcNow;
+
+            for (var i = 1; i <= 10; i++)
+            {
+                //cancellationToken.ThrowIfCancellationRequested();
+                while (!cancellationToken.IsCancellationRequested)
+                {
+                    //generate random time delay, a simulated tick gap
+                    await Task.Delay(r.Next(0, 5) * 100);
+
+                    yield return GetTick(r);
+                }
+            }
+        }
+
+        TickResponse GetTick(Random r)
+        {
+            //pick out a random stock
+            var stockIndex = r.Next(0, stocks.Count);
+            var stock = stocks[stockIndex];
+
+            //generate random price change
+            //https://stackoverflow.com/questions/3975290/produce-a-random-number-in-a-range-using-c-sharp
+            var rDiff = Math.Round((r.NextDouble() * 2) - 1.0, 1);
+
+            //update stock prices
+            stock.lastBid += rDiff;
+            stock.lastOffer += rDiff;
+            stock.date = DateTime.UtcNow;
+
+            var tick = new TickResponse
+            {
+                Bid = stock.lastBid,
+                Offer = stock.lastOffer,
+                Symbol = stock.symbol,
+                Date = stock.date.ToTimestamp(),
+            };
+            return tick;
+        }
+
+        static List<Stock> stocks
         {
             get
             {
                 var s = new List<Stock>();
-                s.Add(new Stock("msft") { bid = 130, offer = 131 });
-                s.Add(new Stock("appl") { bid = 77, offer = 78 });
-                s.Add(new Stock("tsco") { bid = 45, offer = 46 });
+                s.Add(new Stock("msft") { lastBid = 130, lastOffer = 131 });
+                s.Add(new Stock("appl") { lastBid = 77, lastOffer = 78 });
+                s.Add(new Stock("tsco") { lastBid = 45, lastOffer = 46 });
                 return s;
             }
         }
+    }
 
-        public class Stock
+    public class Stock
+    {
+        public Stock(string symbol)
         {
-            public Stock(string _ticker)
-            {
-                ticker = _ticker;
-            }
-            public string ticker { get; }
-            public double bid { get; set; }
-            public double offer { get; set; }
-            public DateTime date { get; set; }
+            this.symbol = symbol;
         }
+        public string symbol { get; }
+        public double lastBid { get; set; }
+        public double lastOffer { get; set; }
+        public DateTime date { get; set; }
     }
 }
