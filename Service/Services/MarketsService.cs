@@ -16,16 +16,17 @@ namespace CasCap.Services
 
         public override async Task GetTickStream(Empty _, IServerStreamWriter<TickResponse> responseStream, ServerCallContext context)
         {
-            await Task.Delay(0);
             _logger.LogInformation(nameof(GetTickStream));
-
+            var count = 1;
             while (!context.CancellationToken.IsCancellationRequested)
             {
                 var cts = new CancellationTokenSource(500);
                 await foreach (var tick in GetTicksAsync(cancellationToken: cts.Token))
                 {
-                    _logger.LogInformation("Sending TickResponse response");
+                    if (count % 10 == 0)
+                        _logger.LogInformation($"streaming {nameof(TickResponse)} #{count}");
                     await responseStream.WriteAsync(tick);
+                    count++;
                 }
             }
         }
@@ -46,18 +47,14 @@ namespace CasCap.Services
         async IAsyncEnumerable<TickResponse> GetTicksAsync([EnumeratorCancellation]CancellationToken cancellationToken)
         {
             var r = new Random();
-            var utcNow = DateTime.UtcNow;
 
-            for (var i = 1; i <= 10; i++)
+            //cancellationToken.ThrowIfCancellationRequested();
+            while (!cancellationToken.IsCancellationRequested)
             {
-                //cancellationToken.ThrowIfCancellationRequested();
-                while (!cancellationToken.IsCancellationRequested)
-                {
-                    //generate random time delay, a simulated tick gap
-                    await Task.Delay(r.Next(0, 5) * 100);
+                //generate random time delay, a simulated tick gap
+                await Task.Delay(r.Next(0, 5) * 100);
 
-                    yield return GetTick(r);
-                }
+                yield return GetTick(r);
             }
         }
 

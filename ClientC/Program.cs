@@ -3,6 +3,7 @@ using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Grpc.Net.Client;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 namespace CasCap
@@ -15,7 +16,7 @@ namespace CasCap
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
         }
-        
+
         async static Task Run()
         {
             using var channel = GrpcChannel.ForAddress("https://localhost:5001");
@@ -28,13 +29,32 @@ namespace CasCap
             {
                 await foreach (var tick in streamingCall.ResponseStream.ReadAllAsync(cancellationToken: cts.Token))
                 {
-                    Console.WriteLine($"{tick.Date.ToDateTime():HH:mm:ss.fff}\t| {tick.Symbol}\t| {tick.Bid:0.00}/{tick.Offer:0.00}");
+                    if (markets.TryGetValue(tick.Symbol, out var market))
+                    {
+                        var colour = market.Bid > tick.Bid ? ConsoleColor.Red : ConsoleColor.Green;
+                        WriteLine($"{tick.Date.ToDateTime():HH:mm:ss.fff}\t| {tick.Symbol}\t| {tick.Bid:0.00}/{tick.Offer:0.00}", colour);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"new market detected '{tick.Symbol}");
+                        markets.Add(tick.Symbol, tick);
+                    }
                 }
             }
             catch (RpcException ex) when (ex.StatusCode == StatusCode.Cancelled)
             {
                 Console.WriteLine("Stream cancelled.");
             }
+        }
+
+        static Dictionary<string, TickResponse> markets { get; set; } = new Dictionary<string, TickResponse>();
+
+        static void WriteLine(string str, ConsoleColor colour)
+        {
+            var current = Console.ForegroundColor;
+            Console.ForegroundColor = colour;
+            Console.WriteLine(str);
+            Console.ForegroundColor = current;
         }
     }
 }

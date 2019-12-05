@@ -9,7 +9,7 @@ import "google/protobuf/timestamp.proto";
 
 option csharp_namespace = "CasCap.Services";
 
-package Market;
+//package Market;
 
 service Markets {
   
