@@ -9,7 +9,7 @@ import "google/protobuf/timestamp.proto";
 
 option csharp_namespace = "CasCap.Services";
 
-//package Market;
+package CasCapRPC;//Executing endpoint 'gRPC - /CasCapRPC.Markets/GetTickStream'
 
 service Markets {
   
@@ -20,11 +20,13 @@ service Markets {
 
   rpc GetTick (google.protobuf.Empty) returns (TickResponse);
 
-  //rpc GetTicks (google.protobuf.Empty) returns (TicksResponse);
-
-    //Server streaming RPCs where the client sends a request to the server and gets a stream to read a sequence of messages back.
+  //Server streaming RPCs where the client sends a request to the server and gets a stream to read a sequence of messages back.
   //The client reads from the returned stream until there are no more messages. gRPC guarantees message ordering within an individual RPC call.
   rpc GetTickStream(google.protobuf.Empty) returns (stream TickResponse);
+
+  rpc GetAllTicks (google.protobuf.Empty) returns (TicksResponse);
+
+  //rpc GetAllTicksStream(google.protobuf.Empty) returns (stream TickResponse);
 
   //Client streaming RPCs where the client writes a sequence of messages and sends them to the server, again using a provided stream.
   //Once the client has finished writing the messages, it waits for the server to read them and return its response.
@@ -60,6 +62,6 @@ message TickResponse {
   google.protobuf.Timestamp date = 4;
 }
 
-//message TicksResponse {
-//  repeated TickResponse ticks = 1;
-//}
+message TicksResponse {
+  repeated TickResponse ticks = 1;
+}

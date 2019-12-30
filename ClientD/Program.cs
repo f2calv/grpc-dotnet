@@ -3,6 +3,7 @@ using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Grpc.Net.Client;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 namespace CasCap
@@ -11,7 +12,12 @@ namespace CasCap
     {
         static async Task Main(string[] args)
         {
-            await Run();
+            while (true)
+            {
+                await Run();
+                await Task.Delay(2_000);
+                Console.Clear();
+            }
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
         }
@@ -22,16 +28,13 @@ namespace CasCap
             var client = new Markets.MarketsClient(channel);
 
             //var cts = new CancellationTokenSource(TimeSpan.FromSeconds(20));
-            using var streamingCall = client.GetTickStream(new Empty()/*, cancellationToken: cts.Token*/);
+            var ticks = await client.GetAllTicksAsync(new Empty()/*, cancellationToken: cts.Token*/);
 
-            try
+            if (ticks.Ticks.Count > 0)
             {
-                await foreach (var tick in streamingCall.ResponseStream.ReadAllAsync(/*cancellationToken: cts.Token*/))
+                foreach (var tick in ticks.Ticks)
                     Display(tick);
-            }
-            catch (RpcException ex) when (ex.StatusCode == StatusCode.Cancelled)
-            {
-                Console.WriteLine("Stream cancelled.");
+                Console.WriteLine($"Count={ticks.Ticks.Count}, Min={ticks.Ticks.Min(p => p.Date):HH:mm:ss}, Max={ticks.Ticks.Max(p => p.Date):HH:mm:ss}");
             }
         }
     }

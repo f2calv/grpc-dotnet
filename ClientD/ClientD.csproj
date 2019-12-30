@@ -4,9 +4,9 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
+  
   <ItemGroup>
     <ProjectReference Include="..\ClientLib\ClientLib.csproj" />
   </ItemGroup>
-
+  
 </Project>
