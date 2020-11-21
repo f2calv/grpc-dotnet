@@ -67,7 +67,7 @@ namespace CasCap.Services
         //    }
         //}
 
-        List<TickResponse> GetTicks
+        static List<TickResponse> GetTicks
         {
             get
             {
@@ -91,7 +91,7 @@ namespace CasCap.Services
 
         static FixedSizedQueue<TickResponse> tickBacklog { get; set; } = new FixedSizedQueue<TickResponse>(30);
 
-        async IAsyncEnumerable<TickResponse> GetTicksAsync([EnumeratorCancellation]CancellationToken cancellationToken)
+        static async IAsyncEnumerable<TickResponse> GetTicksAsync([EnumeratorCancellation]CancellationToken cancellationToken)
         {
             var r = new Random();
 
@@ -99,7 +99,7 @@ namespace CasCap.Services
             while (!cancellationToken.IsCancellationRequested)
             {
                 //generate random time delay, a simulated tick gap
-                await Task.Delay(r.Next(0, 5) * 100);
+                await Task.Delay(r.Next(0, 5) * 100, CancellationToken.None);
                 var tick = GetTick(r);
                 //lets store a limited backlog of data
                 ticksChannel.Writer.TryWrite(tick);
@@ -109,7 +109,7 @@ namespace CasCap.Services
             }
         }
 
-        TickResponse GetTick(Random r)
+        static TickResponse GetTick(Random r)
         {
             //pick out a random stock
             var stockIndex = r.Next(0, stocks.Count);
@@ -138,10 +138,12 @@ namespace CasCap.Services
         {
             get
             {
-                var s = new List<Stock>();
-                s.Add(new Stock("msft") { lastBid = 130, lastOffer = 131 });
-                s.Add(new Stock("appl") { lastBid = 77, lastOffer = 78 });
-                s.Add(new Stock("tsco") { lastBid = 45, lastOffer = 46 });
+                var s = new List<Stock>
+                {
+                    new Stock("msft") { lastBid = 130, lastOffer = 131 },
+                    new Stock("appl") { lastBid = 77, lastOffer = 78 },
+                    new Stock("tsco") { lastBid = 45, lastOffer = 46 }
+                };
                 return s;
             }
         }

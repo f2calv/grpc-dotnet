@@ -3,13 +3,12 @@ using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Grpc.Net.Client;
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 namespace CasCap
 {
     class Program : ProgramBase
     {
-        static async Task Main(string[] args)
+        static async Task Main()
         {
             await Run();
             Console.WriteLine("Press any key to exit...");

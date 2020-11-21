@@ -1,16 +1,14 @@
 ﻿using CasCap.Services;
 using Google.Protobuf.WellKnownTypes;
-using Grpc.Core;
 using Grpc.Net.Client;
 using System;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 namespace CasCap
 {
     class Program : ProgramBase
     {
-        static async Task Main(string[] args)
+        static async Task Main()
         {
             while (true)
             {
