@@ -2,8 +2,21 @@
 
   <PropertyGroup>
     <RootNamespace>CasCap</RootNamespace>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>9.0</LangVersion>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-  
+
+  <PropertyGroup>
+    <Author>Alex Vincent</Author>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <!-- suppress roslyn naming convention messages -->
+    <NoWarn>IDE1006</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <!-- suppress 'Unreachable code detected' -->
+    <NoWarn>CS0162</NoWarn>
+  </PropertyGroup>
+
 </Project>
