@@ -10,8 +10,8 @@ namespace CasCap
     [DebuggerDisplay("Count = {" + nameof(Count) + "}, Limit = {" + nameof(Limit) + "}")]
     public class FixedSizedQueue<T> : IReadOnlyCollection<T>
     {
-        private readonly Queue<T> _queue = new Queue<T>();
-        private readonly object _lock = new object();
+        private readonly Queue<T> _queue = new();
+        private readonly object _lock = new();
 
         public int Count { get { lock (_lock) { return _queue.Count; } } }
         public int Limit { get; }
