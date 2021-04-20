@@ -11,6 +11,7 @@ namespace CasCap
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddGrpc();
+            services.AddSingleton<IPriceGeneratorService, PriceGeneratorService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
