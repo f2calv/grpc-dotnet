@@ -22,7 +22,7 @@ namespace CasCap.Services
     {
         readonly ILogger _logger;
 
-        public PriceGeneratorService(ILogger<MarketsService> logger) => _logger = logger;
+        public PriceGeneratorService(ILogger<PriceGeneratorService> logger) => _logger = logger;
 
         List<StockPrice> GetPrices
         {
@@ -51,7 +51,7 @@ namespace CasCap.Services
         public async IAsyncEnumerable<StockPrice> GetPricesAsync([EnumeratorCancellation] CancellationToken cancellationToken = default)
         {
             var r = new Random();
-
+            _logger.LogInformation("starting {methodName}", nameof(GetPricesAsync));
             //cancellationToken.ThrowIfCancellationRequested();
             while (!cancellationToken.IsCancellationRequested)
             {
