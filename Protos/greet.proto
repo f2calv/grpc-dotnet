@@ -91,14 +91,14 @@ message FullResponse {
 // The response message containing the greetings.
 message NestedObject {
   string message = 1;
-  enum Colour {
+  enum COLOUR {
     //There must be a zero value, so that we can use 0 as a numeric default value.
-    Transparent = 0;
-    White = 1;
-    Black = 2;
-    Orange = 3;
+    COLOUR_UNSPECIFIED = 0;
+    COLOUR_WHITE = 1;
+    COLOUR_BLACK = 2;
+    COLOUR_ORANGE = 3;
   }
-  Colour colour = 2;
+  COLOUR colour = 2;
   AnotherObject obj = 3;
   repeated AnotherObject objects = 4;
 }
