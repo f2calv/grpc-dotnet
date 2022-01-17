@@ -1,6 +1,4 @@
 ﻿using CasCap.Services;
-using System;
-using System.Collections.Generic;
 namespace CasCap;
 
 public abstract class ProgramBase

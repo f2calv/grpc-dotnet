@@ -1,7 +1,5 @@
 ﻿using CasCap.Services;
 using Grpc.Net.Client;
-using System;
-using System.Threading.Tasks;
 namespace CasCap;
 
 class Program

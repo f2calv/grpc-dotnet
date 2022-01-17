@@ -2,8 +2,6 @@
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Grpc.Net.Client;
-using System;
-using System.Threading.Tasks;
 namespace CasCap;
 
 class Program : ProgramBase
