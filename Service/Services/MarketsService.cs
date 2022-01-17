@@ -10,9 +10,9 @@ namespace CasCap.Services
     public class MarketsService : Markets.MarketsBase
     {
         readonly ILogger<MarketsService> _logger;
-        readonly PriceGeneratorService _generatorSvc;
+        readonly IPriceGeneratorService _generatorSvc;
 
-        public MarketsService(ILogger<MarketsService> logger, PriceGeneratorService generatorSvc)
+        public MarketsService(ILogger<MarketsService> logger, IPriceGeneratorService generatorSvc)
         {
             _logger = logger;
             _generatorSvc = generatorSvc;

@@ -10,8 +10,9 @@ namespace CasCap
     {
         static async Task Main()
         {
+            await Task.Delay(2_000);
             while (true)
-            {
+            {                
                 await Run();
                 await Task.Delay(2_000);
                 Console.Clear();
