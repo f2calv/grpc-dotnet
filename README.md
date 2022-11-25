@@ -1,4 +1,4 @@
-# gRPC w/ .NET 6.0
+# gRPC w/ .NET 7.0
 
 This a stock ticker micro services application demo;
 
@@ -8,7 +8,7 @@ This a stock ticker micro services application demo;
 
 ## Setup
 
-To run the application demo in Visual Studio 2022 right-click on the solution in Solution Explorer and select 'Set Startup Projects...' then choose the 'Multiple startup projects' option and then re-arrange the projects in the following order;
+To run the application demo in Visual Studio right-click on the solution in Solution Explorer and select 'Set Startup Projects...' then choose the 'Multiple startup projects' option and then re-arrange the projects in the following order;
 
 - Service
 - ClientA
