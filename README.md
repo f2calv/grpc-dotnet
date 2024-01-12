@@ -1,4 +1,4 @@
-# gRPC w/ .NET 7.0
+# gRPC w/ .NET
 
 This a stock ticker micro services application demo;
 
