@@ -2,21 +2,14 @@ version: 2
 updates:
 
   - package-ecosystem: github-actions
-    directory: "/"
+    directory: /
     schedule:
       interval: weekly
       time: "04:00"
 
   - package-ecosystem: nuget
-    directory: "/"
+    directory: /
     schedule:
       interval: weekly
       time: "04:00"
     open-pull-requests-limit: 10
-    ignore:
-    - dependency-name: Grpc.Tools
-    - dependency-name: Google.Protobuf
-    - dependency-name: Newtonsoft.Json
-    - dependency-name: Grpc.Net.Client
-    - dependency-name: Grpc.AspNetCore.Server
-
