@@ -1,8 +1,6 @@
 exclude: |
   (?x)^(
-    .devcontainer/devcontainer.json|
-    src/libs/SharedLibUI/.*|
-    charts/.*
+    .devcontainer/devcontainer.json
   )$
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
