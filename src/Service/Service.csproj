@@ -16,13 +16,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="..\Protos\another.proto" GrpcServices="Server">
+    <Protobuf Include="..\..\Protos\another.proto" GrpcServices="Server">
       <Link>Protos\another.proto</Link>
     </Protobuf>
-    <Protobuf Include="..\Protos\greet.proto" GrpcServices="Server">
+    <Protobuf Include="..\..\Protos\greet.proto" GrpcServices="Server">
       <Link>Protos\greet.proto</Link>
     </Protobuf>
-    <Protobuf Include="..\Protos\market.proto" GrpcServices="Server">
+    <Protobuf Include="..\..\Protos\market.proto" GrpcServices="Server">
       <Link>Protos\market.proto</Link>
     </Protobuf>
   </ItemGroup>
