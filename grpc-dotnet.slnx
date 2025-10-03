@@ -10,11 +10,11 @@
     <File Path="Protos/market.proto" />
   </Folder>
   <Folder Name="/grpc-dotnet/">
-    <Project Path="ClientA/ClientA.csproj" />
-    <Project Path="ClientB/ClientB.csproj" />
-    <Project Path="ClientC/ClientC.csproj" />
-    <Project Path="ClientD/ClientD.csproj" />
-    <Project Path="ClientLib/ClientLib.csproj" />
-    <Project Path="Service/Service.csproj" />
+    <Project Path="src/ClientA/ClientA.csproj" />
+    <Project Path="src/ClientB/ClientB.csproj" />
+    <Project Path="src/ClientC/ClientC.csproj" />
+    <Project Path="src/ClientD/ClientD.csproj" />
+    <Project Path="src/ClientLib/ClientLib.csproj" />
+    <Project Path="src/Service/Service.csproj" />
   </Folder>
 </Solution>
