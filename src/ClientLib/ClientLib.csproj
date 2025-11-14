@@ -2,8 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,13 +15,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="..\Protos\greet.proto" GrpcServices="Client">
+    <Protobuf Include="..\..\Protos\greet.proto" GrpcServices="Client">
       <Link>Protos\greet.proto</Link>
     </Protobuf>
-    <Protobuf Include="..\Protos\another.proto" GrpcServices="Client">
+    <Protobuf Include="..\..\Protos\another.proto" GrpcServices="Client">
       <Link>Protos\another.proto</Link>
     </Protobuf>
-    <Protobuf Include="..\Protos\market.proto" GrpcServices="Client">
+    <Protobuf Include="..\..\Protos\market.proto" GrpcServices="Client">
       <Link>Protos\market.proto</Link>
     </Protobuf>
   </ItemGroup>

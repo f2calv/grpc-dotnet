@@ -6,7 +6,7 @@ namespace CasCap;
 
 class Program : ProgramBase
 {
-    static async Task Main()
+    private static async Task Main()
     {
         await Run();
         Console.WriteLine("Press any key to exit...");

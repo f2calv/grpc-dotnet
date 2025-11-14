@@ -4,7 +4,7 @@ namespace CasCap.Services;
 
 public class GreeterService : Greeter.GreeterBase
 {
-    readonly ILogger<GreeterService> _logger;
+    private readonly ILogger<GreeterService> _logger;
 
     public GreeterService(ILogger<GreeterService> logger) => _logger = logger;
 

@@ -4,7 +4,7 @@ namespace CasCap;
 
 class Program
 {
-    static async Task Main()
+    private static async Task Main()
     {
         await Run();
         Console.WriteLine("Press any key to exit...");
@@ -19,7 +19,7 @@ class Program
         var client = new Greeter.GreeterClient(channel);
         for (var i = 0; i < 10; i++)
         {
-            var reply = await client.SayHelloAsync(new HelloRequest { Name = "GreeterClientA" });
+            var reply = await client.SayHelloAsync(new HelloRequest { Name = "GreeterClientB" });
             Console.WriteLine("Greeting: " + reply.Message);
             await Task.Delay(1_000);
         }

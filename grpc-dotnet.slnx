@@ -1,0 +1,20 @@
+﻿<Solution>
+  <Folder Name="/grpc-dotnet/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Folder Name="/grpc-dotnet/Protos/">
+    <File Path="Protos/another.proto" />
+    <File Path="Protos/greet.proto" />
+    <File Path="Protos/market.proto" />
+  </Folder>
+  <Folder Name="/grpc-dotnet/">
+    <Project Path="src/ClientA/ClientA.csproj" />
+    <Project Path="src/ClientB/ClientB.csproj" />
+    <Project Path="src/ClientC/ClientC.csproj" />
+    <Project Path="src/ClientD/ClientD.csproj" />
+    <Project Path="src/ClientLib/ClientLib.csproj" />
+    <Project Path="src/Service/Service.csproj" />
+  </Folder>
+</Solution>

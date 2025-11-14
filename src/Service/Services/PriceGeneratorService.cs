@@ -15,11 +15,11 @@ public interface IPriceGeneratorService
 
 public class PriceGeneratorService : IPriceGeneratorService
 {
-    readonly ILogger _logger;
+    private readonly ILogger _logger;
 
     public PriceGeneratorService(ILogger<PriceGeneratorService> logger) => _logger = logger;
 
-    static List<StockPrice> GetPrices
+    private static List<StockPrice> GetPrices
     {
         get
         {
@@ -61,7 +61,7 @@ public class PriceGeneratorService : IPriceGeneratorService
         }
     }
 
-    static StockPrice GetStockPrice(Random r)
+    private static StockPrice GetStockPrice(Random r)
     {
         //pick out a random stock
         var stockIndex = r.Next(0, stocks.Count);
@@ -79,7 +79,7 @@ public class PriceGeneratorService : IPriceGeneratorService
         return stock;
     }
 
-    static List<StockPrice> stocks
+    private static List<StockPrice> stocks
     {
         get
         {

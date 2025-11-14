@@ -3,9 +3,9 @@ namespace CasCap;
 
 public abstract class ProgramBase
 {
-    static Dictionary<string, TickResponse> markets { get; set; } = new Dictionary<string, TickResponse>();
+    private static Dictionary<string, TickResponse> markets { get; set; } = new Dictionary<string, TickResponse>();
 
-    static void WriteLine(string str, ConsoleColor colour)
+    private static void WriteLine(string str, ConsoleColor colour)
     {
         var current = Console.ForegroundColor;
         Console.ForegroundColor = colour;

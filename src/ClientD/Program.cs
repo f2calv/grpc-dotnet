@@ -5,7 +5,7 @@ namespace CasCap;
 
 class Program : ProgramBase
 {
-    static async Task Main()
+    private static async Task Main()
     {
         await Task.Delay(2_000);
         while (true)
