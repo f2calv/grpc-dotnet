@@ -1,5 +1,7 @@
 # gRPC with .NET
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=f2calv_grpc-dotnet&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=f2calv_grpc-dotnet)
+
 A stock-ticker playground demonstrating several .NET gRPC client patterns against one service.
 
 ## Projects
