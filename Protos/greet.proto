@@ -13,7 +13,7 @@ package Greet;
 
 // The greeting service definition.
 service Greeter {
-  
+
   // Unary RPCs where the client sends a single request to the server and gets a single response back, just like a normal function call.
   rpc SayHello (HelloRequest) returns (HelloResponse);
 
@@ -33,7 +33,7 @@ service Greeter {
   //for example, the server could wait to receive all the client messages before writing its responses, or it could alternately read a message then write a message,
   //or some other combination of reads and writes. The order of messages in each stream is preserved.
   rpc BidiHello(stream HelloRequest) returns (stream HelloResponse);
-  
+
   rpc SomeVoidOperation (google.protobuf.Empty) returns (google.protobuf.Empty);
 }
 
