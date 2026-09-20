@@ -1,19 +1,33 @@
-# gRPC w/ .NET
+# gRPC with .NET
 
-This a stock ticker micro services application demo;
+A stock-ticker playground demonstrating several .NET gRPC client patterns against one service.
 
-- Clients A & B simple connections to a Greeter service.
-- Clients C & D consume stock price information data.
-- Service - generates randomised stock price movements.
+## Projects
 
-## Setup
+| Project | Purpose |
+| --- | --- |
+| `Service` | Hosts the Greeter and stock-price services. |
+| `ClientA`, `ClientB` | Exercise simple Greeter calls. |
+| `ClientC`, `ClientD` | Consume the stock-price stream. |
+| `ClientLib` | Provides shared client behavior. |
 
-To run the application demo in Visual Studio right-click on the solution in Solution Explorer and select 'Set Startup Projects...' then choose the 'Multiple startup projects' option and then re-arrange the projects in the following order;
+Protocol definitions are stored in `Protos/`.
 
-- Service
-- ClientA
-- ClientB
-- ClientC
-- ClientD
+## Prerequisites
 
-Then hit play...
+- A .NET 10 SDK
+- Visual Studio 2026, VS Code with C# Dev Kit, or another .NET-compatible editor
+
+## Run the playground
+
+Restore and build the root solution:
+
+```pwsh
+dotnet restore .\grpc-dotnet.slnx
+dotnet build .\grpc-dotnet.slnx --no-restore
+```
+
+Start `Service` before starting any client. In Visual Studio, configure multiple startup projects in
+this order: `Service`, `ClientA`, `ClientB`, `ClientC`, `ClientD`.
+
+This repository contains demonstration code and does not deploy a hosted service.
