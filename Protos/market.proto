@@ -12,7 +12,7 @@ option csharp_namespace = "CasCap.Services";
 package CasCapRPC;//Executing endpoint 'gRPC - /CasCapRPC.Markets/GetTickStream'
 
 service Markets {
-  
+
   // Unary RPCs where the client sends a single request to the server and gets a single response back, just like a normal function call.
   rpc GetMarket (MarketRequest) returns (MarketResponse);
 
