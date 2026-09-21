@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Threading.Channels;
 namespace CasCap.Services;
 
@@ -23,11 +24,10 @@ public class PriceGeneratorService : IPriceGeneratorService
     {
         get
         {
-            var r = new Random();
             var limit = 1_000;
             var l = new List<StockPrice>(limit);
             for (var i = 0; i < limit; i++)
-                l.Add(GetStockPrice(r));
+                l.Add(GetStockPrice());
             return l;
         }
     }
@@ -45,14 +45,13 @@ public class PriceGeneratorService : IPriceGeneratorService
 
     public async IAsyncEnumerable<StockPrice> GetPricesAsync([EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
-        var r = new Random();
         _logger.LogInformation("starting {methodName}", nameof(GetPricesAsync));
         //cancellationToken.ThrowIfCancellationRequested();
         while (!cancellationToken.IsCancellationRequested)
         {
             //generate random time delay, a simulated price gap
-            await Task.Delay(r.Next(0, 5) * 100, CancellationToken.None);
-            var price = GetStockPrice(r);
+            await Task.Delay(RandomNumberGenerator.GetInt32(0, 5) * 100, cancellationToken);
+            var price = GetStockPrice();
             //lets store a limited backlog of data
             pricesChannel.Writer.TryWrite(price);
             priceQueue.Enqueue(price);
@@ -61,15 +60,15 @@ public class PriceGeneratorService : IPriceGeneratorService
         }
     }
 
-    private static StockPrice GetStockPrice(Random r)
+    private static StockPrice GetStockPrice()
     {
         //pick out a random stock
-        var stockIndex = r.Next(0, stocks.Count);
+        var stockIndex = RandomNumberGenerator.GetInt32(stocks.Count);
         var stock = stocks[stockIndex];
 
         //generate random price change
         //https://stackoverflow.com/questions/3975290/produce-a-random-number-in-a-range-using-c-sharp
-        var rDiff = Math.Round((r.NextDouble() * 2) - 1.0, 1);
+        var rDiff = RandomNumberGenerator.GetInt32(-10, 11) / 10.0;
 
         //update stock prices
         stock.bid += rDiff;
