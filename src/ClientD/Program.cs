@@ -14,8 +14,6 @@ class Program : ProgramBase
             await Task.Delay(2_000);
             Console.Clear();
         }
-        Console.WriteLine("Press any key to exit...");
-        Console.ReadKey();
     }
 
     async static Task Run()
