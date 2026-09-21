@@ -19,12 +19,13 @@ public class MarketsService : Markets.MarketsBase
         var count = 1;
         while (!context.CancellationToken.IsCancellationRequested)
         {
-            var cts = new CancellationTokenSource(500);
+            using var cts = CancellationTokenSource.CreateLinkedTokenSource(context.CancellationToken);
+            cts.CancelAfter(500);
             await foreach (var price in _generatorSvc.GetPricesAsync(cancellationToken: cts.Token))
             {
                 if (count % 10 == 0)
                     _logger.LogInformation("streaming {objectName} #{count}", nameof(TickResponse), count);
-                await responseStream.WriteAsync(new TickResponse(price));
+                await responseStream.WriteAsync(new TickResponse(price), context.CancellationToken);
                 count++;
             }
         }

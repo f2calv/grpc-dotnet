@@ -3,7 +3,6 @@ using System.Diagnostics;
 namespace CasCap;
 
 //https://stackoverflow.com/questions/5852863/fixed-size-queue-which-automatically-dequeues-old-values-upon-new-enques
-[Serializable]
 [DebuggerDisplay("Count = {" + nameof(Count) + "}, Limit = {" + nameof(Limit) + "}")]
 public class FixedSizedQueue<T> : IReadOnlyCollection<T>
 {
