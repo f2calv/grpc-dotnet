@@ -20,18 +20,6 @@ public class PriceGeneratorService : IPriceGeneratorService
 
     public PriceGeneratorService(ILogger<PriceGeneratorService> logger) => _logger = logger;
 
-    private static List<StockPrice> GetPrices
-    {
-        get
-        {
-            var limit = 1_000;
-            var l = new List<StockPrice>(limit);
-            for (var i = 0; i < limit; i++)
-                l.Add(GetStockPrice());
-            return l;
-        }
-    }
-
     Channel<StockPrice> pricesChannel { get; set; } = Channel.CreateBounded<StockPrice>(
         new BoundedChannelOptions(1024)
         {
