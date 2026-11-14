@@ -17,7 +17,7 @@ Protocol definitions are stored in `Protos/`.
 
 ## Prerequisites
 
-- The .NET 11 SDK pinned in `global.json`
+- A stable .NET 11 SDK
 - Visual Studio 2026, VS Code with C# Dev Kit, or another .NET-compatible editor
 
 ## Run the playground
